@@ -1,3 +1,29 @@
+<?
+if ($auth_req) {
+  if (!isset($_SERVER['PHP_AUTH_USER'])) {
+    header('WWW-Authenticate: Basic realm="Enduro SPb"');
+    header('HTTP/1.0 401 Unauthorized');
+    echo 'Без авторизации нельзя.';
+    exit;
+  } else {
+    $ok=0;
+    global $auth_user=$_SERVER['PHP_AUTH_USER'];
+    $fp=fopen("{$_SERVER['DOCUMENT_ROOT']}/user.data",'r');
+    while (!feof($fp)) {
+      list ($u,$p)=split(' ',fgets($fp));
+      $p=trim($p);
+      if ($u==$auth_user && $p==$_SERVER['PHP_AUTH_PW']) {
+        $ok=1;
+        break;
+      }
+    }
+    if (!$ok) {
+      echo "\n\nПароль не сгодился.";
+      exit;
+    }
+  }
+}
+?>
 <html>
 <head>
 <meta http-equiv="Cache-Control" content="no-cache">
