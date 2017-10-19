@@ -1,0 +1,71 @@
+ a {
+color: black;
+}
+
+.main {
+  padding: 10px;
+  float:left;
+}
+  
+
+#date_table {
+ width: 70%;
+ margin: auto 
+}
+
+.button {
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+-webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+width:100%;
+margin:3px;
+}
+
+.button:hover {
+box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+background-color: #eee;
+}
+
+
+table { 
+    width: 100%; /* Ширина таблицы */
+    border-collapse: collapse;
+    border-spacing: 0; /* Расстояние между ячейками */
+     table-layout: fixed; /* Фиксированная ширина ячеек */
+     text-align: center;
+     padding: 10px;
+ }
+  
+select {
+  width: 200px;
+}
+   
+input {
+width: 200px;
+}
+  
+.field {
+clear:both; 
+text-align:right; 
+margin-top:3px;
+margin-bottom:3px; 
+}
+
+label {
+float:left;
+ width: 200px;
+  text-align: left}
+
+.delete_on {
+    color: black;
+    background-color: #ff0000;
+}
+
+.delete_off {
+    color: red;
+    background-color: #ffffff;
+}
+
+
