@@ -13,6 +13,8 @@ create table event (
   event_id int unsigned primary key auto_increment,   -- Уникальный идентификатор события
   dt date,            -- Дата события
   passed boolean,     -- Событие прошло
+  active boolean,     -- Событие видно всем участникам
+  aproved boolean,    -- Допущено модератором
   ref text,           -- Ссылка на событие в инете
   name text,          -- Название
   descr text,         -- Описание
@@ -48,4 +50,25 @@ create table rating (
   event_id_ref int not null,  -- считается после каждого события, собития сортируются по датам, текущий рейтинг по последнему событию.
   racer_id_ref int not null,  -- гонщик
   section_id_ref int not null -- класс. 
+);
+
+  
+-- 
+
+-- Кто может редактировать события и вносить результаты гонок
+create table auth (
+  auth_id int unsigned primary key auto_increment,
+  login text not null,  -- plain text
+  passwd text not null, -- md5 hash
+  name text not null,    -- Имя/кличка итп
+  phone text not null,
+  email text not null
+);
+
+-- может править только событие, которое создал и до его окончания.
+-- событие окончено, когда данные о результатах внесены и нажата кнопка "готово" или "считать рейтинг".
+-- кто угодно может зарегистрироваться и создать своё событие.
+create table access (
+  auth_id_ref int not null,
+  event_id_ref int not null
 );
