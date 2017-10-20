@@ -72,3 +72,9 @@ create table access (
   auth_id_ref int not null,
   event_id_ref int not null
 );
+
+-- Привязка логина к гонщику.
+create table logging (
+  auth_id_ref int not null,
+  racer_id_ref int not null
+);
