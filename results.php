@@ -41,6 +41,10 @@ i = "0";
 window.onload = function() {
 addF();
 get('peoples');
+
+
+
+
 }
 
 
@@ -72,7 +76,7 @@ new_form = '<div class="field"><label for="fio">Спортсмен: </label><inp
     }); 
     
     
-    $('input').keydown(function(e) {
+    $('.auto').keydown(function(e) {
   if (e.keyCode == 13 && e.ctrlKey) {
   this.form.submit(); 
   }else if (e.keyCode == 13){
@@ -81,14 +85,32 @@ new_form = '<div class="field"><label for="fio">Спортсмен: </label><inp
   }
 });
 
-  
-$( ".result" ).click(function() {
-  //alert($(this).attr('id')+" - "+$(this).attr('result')+" - "+$(this).attr('event'));
-  //$(this).replaceWith('<input type="text" value="'+$(this).prop("value")+'" />');
-});      
+
 
 
 };
+
+
+
+function update_places(){
+
+$("#results_table").html("");
+$('#results').find ('.result').each(function() {
+  // добавим новое свойство к объекту $data
+  // имя свойства – значение атрибута name элемента
+  // значение свойства – значение свойство value элемента
+   if ( $(this).val().match(/^\d+$/)){
+  //alert("oo"+$(this).attr('id')+" - "+$(this).val()+" - "+$(this).attr('event'));
+  
+   $("#results_table").append($(this).attr('fio')+" - "+$(this).val()+"<br>");
+
+  
+  }
+ 
+});
+
+};
+
 
 
 
@@ -148,7 +170,7 @@ $sqli->execute();
 
 
 
-
+<form id="results" action="<?=$_SERVER['PHP_SELF']."?event=".$event_id?>">
  <table class = "date_table" border="1" >
    
          <tr>   
@@ -169,7 +191,7 @@ echo '<tr>';
 echo '<td>'.$row[number].' / <a href="results.php?event='.$event_id.'&del_id='.$row[id].'">Удалить</a></td>';
 echo '<td>'.$row[fio].'</td>';
 echo '<td>'.$row[sclass].'</td>';
-echo '<td class="id" id="'.$row[id].'" result="'.$row[result].'" event="'.$event_id.'">'.$row[result].'</td>';
+echo '<td><input class="result" id="'.$row[id].'" fio = "'.$row[fio].'" value="'.$row[result].'" maxlength="3" event="'.$event_id.'"></input></td>';
 echo '</tr>';
 }            
   
@@ -177,8 +199,14 @@ echo '</tr>';
 
 ?>
 </table>
-
-
+</form>
+ <div>
+ 
+    <button onclick="update_places()">Обновить места</button>
+ </div>
+ 
+ <div id="results_table"></div>
+ 
 <div id="date_table"></div>
 
 
